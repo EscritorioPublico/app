@@ -1903,6 +1903,7 @@ function __renderBibPosters(q, tab) {
   const grid = document.getElementById("zcat-grid"); if (!grid) return;
   const t = norm((q || "").trim());
   let list = __bibList(tab).filter(i => i.disponible !== false);
+  const __yr = window.__zcatYear || ""; if (__yr) list = list.filter(i => new RegExp("(^|\\D)" + __yr + "(\\D|$)").test(String(i.sub || "")));
   if (t) list = list.filter(i => norm(i.title).includes(t) || norm(i.sub || "").includes(t) || norm(i.grupo || "").includes(t));
   if (!list.length) { grid.innerHTML = '<p class="fine">' + (t ? "Sin coincidencias para «" + esc(q) + "»." : "Muy pronto habrá contenido aquí.") + "</p>"; return; }
   const limit = __bibLimit[tab] || 60, shown = list.slice(0, limit), ph = __ZCAT[tab].ph;
@@ -1930,12 +1931,19 @@ function __zonaSyncHub() {
     sm.textContent = n ? n + " " + (n === 1 ? __ZCAT[key].sing : __ZCAT[key].plur) : base;
   });
 }
+function __zcatFillYears(tab) {
+  const sel = document.getElementById("zcat-year"); if (!sel) return;
+  const yrs = [...new Set(__bibList(tab).filter(i => i.disponible !== false).map(i => (String(i.sub || "").match(/\b(?:19|20)\d{2}\b/) || [])[0]).filter(Boolean))].sort((a, b) => b - a);
+  sel.innerHTML = '<option value="">Todos los años</option>' + yrs.map(y => '<option value="' + y + '">' + y + '</option>').join("");
+  sel.value = window.__zcatYear || "";
+}
 function abrirZonaCat(key) {
   if (key === "todo") { window.__codigoFromHome = "zona"; setView("streaming"); setStreamTab("biblioteca"); return; }
   const c = __ZCAT[key]; if (!c) return;
   window.__zcatKey = key; __bibLimit[key] = 60;
   const t = document.getElementById("zcat-title"); if (t) t.textContent = c.title;
   const i = document.getElementById("zcat-search"); if (i) { i.value = ""; i.placeholder = c.search; }
+  window.__zcatYear = ""; __zcatFillYears(key);
   __renderBibPosters("", key);
   setView("zona");
   document.getElementById("view-zona").classList.add("hidden");
@@ -1962,6 +1970,31 @@ if (!window.__zonaSetViewWrapped) {
   });
   const back = document.getElementById("zcat-back"); if (back) back.onclick = () => setView("zona");
   const inp = document.getElementById("zcat-search"); if (inp) inp.addEventListener("input", e => __renderBibPosters(e.target.value, window.__zcatKey || "peliculas"));
+})();
+(function () {
+  const sel = document.getElementById("zcat-year");
+  if (sel) sel.addEventListener("change", e => { window.__zcatYear = e.target.value; const i = document.getElementById("zcat-search"); __renderBibPosters(i ? i.value : "", window.__zcatKey || "peliculas"); });
+  const b = document.getElementById("doc-escrito-libre");
+  if (b) b.onclick = () => {
+    if (b.classList.contains("active")) return;
+    try { confettiBurst(b); } catch (e) {}
+    const msg = (db.waMsgs && db.waMsgs.escritoLibre) || "HOLA, QUIERO COTIZAR UN ESCRITO LIBRE EN _ESCRITORIO PUBLICO_";
+    const _wt = window.open("", "_blank");
+    sendPlane(b, () => { toast("Solicitud enviada", "📁"); _wt ? (_wt.location.href = waLink(msg)) : (location.href = waLink(msg)); });
+  };
+})();
+(function () {
+  let b = document.getElementById("to-top");
+  if (!b) {
+    b = document.createElement("button"); b.type = "button"; b.id = "to-top"; b.className = "to-top"; b.title = "Subir"; b.setAttribute("aria-label", "Subir");
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"></path><path d="m5 12 7-7 7 7"></path></svg>';
+    document.body.appendChild(b);
+  }
+  let tick = false;
+  const upd = () => { tick = false; b.classList.toggle("show", (window.scrollY || document.documentElement.scrollTop || 0) > 300); };
+  window.addEventListener("scroll", () => { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+  b.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  upd();
 })();
 function renderBiblioteca(q) { return __renderBibTodo(q); }
 function __renderBibTodo(q) {
