@@ -330,3 +330,14 @@ html.xm-season .s-plan,html.hw-season .s-plan{background:linear-gradient(145deg,
 .m-extra-p{font-size:.85rem;color:#2ecc71;white-space:nowrap}
 .m-extras-total{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(255,255,255,.22);font-weight:800}
 .m-extras-total b{font-size:1.1rem;color:#2ecc71}
+
+.zcat-year-sel{flex:1;min-width:0;height:46px;padding:0 16px;border-radius:16px;font-size:.98rem;font-weight:700;color:var(--tx);background:linear-gradient(140deg,var(--gA),var(--gB));border:1px solid var(--brd);outline:0;cursor:pointer;color-scheme:dark;-webkit-appearance:none;appearance:none;background-image:linear-gradient(140deg,var(--gA),var(--gB)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:0 0,right 14px center}
+.zcat-year-sel option{background:#0b1a33;color:#eef4ff}
+[data-theme=light] .zcat-year-sel{color-scheme:light}
+[data-theme=light] .zcat-year-sel option{background:#fff;color:#0e1f3c}
+[data-theme=green] .zcat-year-sel option{background:#0a3350;color:#eafff8}
+.to-top{position:fixed;right:16px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:60;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;padding:0;cursor:pointer;color:var(--tx);background:linear-gradient(140deg,var(--gA),var(--gB) 45%,var(--gA));-webkit-backdrop-filter:blur(var(--blur)) saturate(170%);backdrop-filter:blur(var(--blur)) saturate(170%);border:1px solid var(--brd);box-shadow:var(--shadow),inset 0 1px 0 var(--inset);opacity:0;transform:translateY(14px) scale(.85);pointer-events:none;transition:opacity .25s,transform .25s}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top:hover{transform:translateY(-2px)}
+.to-top:active{transform:scale(.92)}
+@media (prefers-reduced-motion:reduce){.to-top{transition:none}}
