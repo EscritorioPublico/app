@@ -341,3 +341,68 @@ html.xm-season .s-plan,html.hw-season .s-plan{background:linear-gradient(145deg,
 .to-top:hover{transform:translateY(-2px)}
 .to-top:active{transform:scale(.92)}
 @media (prefers-reduced-motion:reduce){.to-top{transition:none}}
+
+.zcat-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.zcat-tabs[hidden]{display:none}
+.zcat-chip{padding:9px 18px;border-radius:999px;border:1px solid var(--brd);background:linear-gradient(140deg,var(--gA),var(--gB));color:var(--tx);font:inherit;font-weight:700;font-size:.92rem;cursor:pointer;-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur));transition:transform .15s,background .2s,box-shadow .2s}
+.zcat-chip:active{transform:scale(.96)}
+.zcat-chip.active{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#04121f;border-color:transparent;box-shadow:0 6px 18px rgba(94,209,255,.35)}
+.bib-sagas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.bib-saga{cursor:pointer;padding:14px 14px 16px;transition:transform .18s}
+.bib-saga:hover{transform:translateY(-3px)}
+.bib-saga .bib-top{margin-bottom:10px}
+.bib-saga .bib-saga-img{width:100%;height:auto;aspect-ratio:auto;max-height:340px;object-fit:cover}
+.bib-saga .bib-saga-ph{height:200px}
+.bib-saga .inf-card-title{font-size:1.05rem;text-align:center}
+.bib-saga-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px}
+.bib-saga-price{text-align:center;font-weight:800;font-size:1.05rem;margin-top:10px}
+.m-ico-cover.is-saga{width:100%;max-width:340px;height:auto;max-height:420px}
+.m-ico-cover.is-saga .cover-img{height:auto;max-height:420px}
+
+.bib-card.is-big{padding-top:16px;padding-bottom:20px}
+.bib-card.is-big .bib-img{aspect-ratio:auto;height:auto;max-height:340px}
+.bib-card.is-big .bib-img-ph{height:200px;font-size:4.4rem}
+.bib-card.is-big .inf-card-title{font-size:1.15rem;text-align:center}
+
+/* ===== Zona Digital · rediseño de tarjetas (Sagas y Todo Digital) y subtítulos en gris ===== */
+.bib-sagas{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.zcard{display:flex;flex-direction:column;overflow:hidden;border-radius:22px;border:1px solid var(--brd);background:linear-gradient(140deg,var(--gA),var(--gB));box-shadow:0 10px 26px rgba(2,6,20,.32);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;-webkit-tap-highlight-color:transparent;-webkit-backdrop-filter:blur(var(--blur));backdrop-filter:blur(var(--blur))}
+.zcard:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(2,6,20,.46)}
+.zcard:active{transform:scale(.98)}
+.zcard:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.zc-cover{position:relative;aspect-ratio:3/4;overflow:hidden;background:rgba(255,255,255,.06)}
+.zcard.is-wide .zc-cover{aspect-ratio:21/10}
+.zc-cover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(to top,rgba(0,0,0,.32),transparent);pointer-events:none}
+.zc-img{display:block;width:100%;height:100%;object-fit:cover}
+.zc-ph{display:grid;place-items:center;font-size:3.6rem}
+.zc-body{display:flex;flex-direction:column;gap:9px;flex:1;padding:13px 14px 14px}
+.zc-title{margin:0;font-size:1.02rem;line-height:1.25;font-weight:800;color:var(--tx)}
+.zc-chips{display:flex;flex-wrap:wrap;gap:6px}
+.zc-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:4px}
+.zc-price{font-weight:900;font-size:.95rem;color:#2ecc71;border:1px solid rgba(46,204,113,.5);background:rgba(0,0,0,.25);border-radius:99px;padding:3px 12px}
+.zc-price.is-quote{color:var(--tx2);border-color:var(--brd)}
+.zc-cta{font-size:.78rem;font-weight:800;color:var(--acc)}
+[data-theme=light] .zc-price{color:#0f7d4f;border-color:rgba(16,150,90,.4);background:rgba(16,150,90,.1)}
+/* el año de las películas ahora es un subtítulo gris, igual que en Trámites */
+.bp-year{color:#d7d9dc;background:rgba(52,55,60,.85);border:1px solid rgba(255,255,255,.08);letter-spacing:.03em}
+/* carátula en el popup */
+.m-ico-cover.is-saga{border-radius:18px}
+
+/* Popup de Películas/Sagas/Series/Todo Digital: la carátula nunca agranda el popup (banner ancho o póster alto) */
+.m-ico.m-ico-cover.is-saga{width:fit-content;max-width:min(300px,100%);height:auto;max-height:180px;margin:0 auto 12px;display:grid;place-items:center;border-radius:14px;background:transparent}
+.m-ico-cover.is-saga .cover-img{display:block;width:auto;max-width:100%;height:auto;max-height:180px;object-fit:contain;border-radius:14px}
+
+/* Tamaño de las cards (cardSize del CRM): Normal = compacta como los pósters de Películas · Grande = card ancha */
+.bib-sagas{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px;grid-auto-flow:dense}
+.bib-sagas.is-bigs{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.bib-sagas+.bib-sagas{margin-top:14px}
+.zcard.is-compact{border-radius:14px;box-shadow:0 6px 16px rgba(2,6,20,.28)}
+.zcard.is-compact .zc-cover{aspect-ratio:2/3}
+.zcard.is-compact .zc-ph{font-size:2.2rem}
+.zcard.is-compact .zc-body{padding:8px 9px 10px;gap:6px}
+.zcard.is-compact .zc-title{font-size:.76rem;line-height:1.2;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.zcard.is-compact .zc-chips{gap:4px}
+.zcard.is-compact .srv-sub-badge{font-size:.62rem;padding:2px 7px}
+.zcard.is-compact .zc-price{font-size:.74rem;padding:1px 9px}
+.zcard.is-compact .zc-foot{justify-content:flex-start;padding-top:0}
+.zcard.is-compact .zc-cta{display:none}
