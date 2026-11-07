@@ -783,8 +783,7 @@ window.rfcComboOpen = function (itemId) {
   const find = (id) => { for (const s of db.servicios) { const it = (s.items || []).find(x => x.id === id); if (it) return { sec: s, it }; } return null; };
   const F = find(cfg.fotoId), C = find(cfg.curpId);
   if (!F || !C) return false;
-  const showF = F.it.disponible !== false, showC = C.it.disponible !== false;
-  if (!showF && !showC) return false;
+  const showF = true, showC = true;   // siempre las dos opciones, como antes (aunque el trámite esté oculto en la lista)
   const precio = (it) => { const p = priceForRole(it); return (p == null || p === "") ? "Cotizar" : "💲" + p; };
   const btn = (id, emoji, label, it) => `<div class="m-row"><button class="btn btn-primary" id="${id}">${esc(emoji)} ${esc(label)} — ${precio(it)}</button></div>`;
   openModal(`
